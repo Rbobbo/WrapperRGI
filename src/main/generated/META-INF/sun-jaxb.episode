@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.11 
+Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2016.10.24 alle 02:44:51 PM CEST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://webservices.samples.blog.com">
+    <schemaBindings map="false">
+      <package name="com.blog.samples.webservices"/>
+    </schemaBindings>
+    <bindings scd="~tns:DetailService">
+      <class ref="com.blog.samples.webservices.DetailService"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.webserviceX.NET">
+    <schemaBindings map="false">
+      <package name="net.webservicex"/>
+    </schemaBindings>
+    <bindings scd="tns:GetWeather">
+      <class ref="net.webservicex.GetWeather"/>
+    </bindings>
+    <bindings scd="tns:GetWeatherResponse">
+      <class ref="net.webservicex.GetWeatherResponse"/>
+    </bindings>
+    <bindings scd="tns:GetCitiesByCountry">
+      <class ref="net.webservicex.GetCitiesByCountry"/>
+    </bindings>
+    <bindings scd="tns:GetCitiesByCountryResponse">
+      <class ref="net.webservicex.GetCitiesByCountryResponse"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://com/blog/samples/webservices/servicedetail">
+    <schemaBindings map="false">
+      <package name="com.blog.samples.webservices.servicedetail"/>
+    </schemaBindings>
+    <bindings scd="tns:ServiceCallRequest">
+      <class ref="com.blog.samples.webservices.servicedetail.ServiceCallRequest"/>
+    </bindings>
+    <bindings scd="tns:ServiceCallResponse">
+      <class ref="com.blog.samples.webservices.servicedetail.ServiceCallResponse"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.w3schools.com/xml/">
+    <schemaBindings map="false">
+      <package name="com.w3schools.xml"/>
+    </schemaBindings>
+    <bindings scd="tns:FahrenheitToCelsius">
+      <class ref="com.w3schools.xml.FahrenheitToCelsius"/>
+    </bindings>
+    <bindings scd="tns:FahrenheitToCelsiusResponse">
+      <class ref="com.w3schools.xml.FahrenheitToCelsiusResponse"/>
+    </bindings>
+    <bindings scd="tns:CelsiusToFahrenheit">
+      <class ref="com.w3schools.xml.CelsiusToFahrenheit"/>
+    </bindings>
+    <bindings scd="tns:CelsiusToFahrenheitResponse">
+      <class ref="com.w3schools.xml.CelsiusToFahrenheitResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+
