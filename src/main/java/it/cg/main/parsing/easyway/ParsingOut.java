@@ -1,17 +1,18 @@
 package it.cg.main.parsing.easyway;
 
+import com.pass.global.WSPassProHelloWorldOperation;
+
 import it.cg.main.dto.RoutingDTO;
-import net.webservicex.GetWeather;
 
 public class ParsingOut
 {
 	
-	public GetWeather getParsing(RoutingDTO request)
+	public WSPassProHelloWorldOperation getParsing(RoutingDTO request)
 	{
 		
-		GetWeather getService = new GetWeather();
+		WSPassProHelloWorldOperation getService = new WSPassProHelloWorldOperation();
 		
-		getService.setCityName("Bologna");
+		getService.setArg0(0);
 		
 		return getService;
 	}

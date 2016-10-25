@@ -18,8 +18,7 @@
 		http://www.springframework.org/schema/integration/stream
 		http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.3.xsd
 		http://www.springframework.org/schema/integration/http
-		http://www.springframework.org/schema/integration/http/spring-integration-http-4.3.xsd
-		">
+		http://www.springframework.org/schema/integration/http/spring-integration-http-4.3.xsd">
 
 	<!-- Import marshalling handlers -->
 	<import resource="spring-integration-marshalling-config.xml"/>
@@ -53,7 +52,7 @@
 		<int-ws:outbound-gateway
 				marshaller="marshallerOutboundJaxb"  unmarshaller="marshallerOutboundJaxb" 
 				uri="http://vbwebasu-0.directline.italy:8380/directlinepasspro/services/WSPassPro"
-				header-mapper="headerMapperMeteo" >
+				header-mapper="headerMapperEasy" >
 		</int-ws:outbound-gateway>
 	</int:chain>
 	
@@ -61,7 +60,7 @@
 	<int:service-activator id="serviceActivatorMeteoPost" input-channel="easyChainActivatorResultChannel" >
 		<bean id="replyEasyWayAcrivator" class="it.cg.main.integration.easyway.reply.ReplyEasyWayAcrivator"></bean>
 	</int:service-activator>
-	<bean id="headerMapperMeteo" class="it.cg.main.integration.easyway.ws.HeaderMapperEasy" />
+	<bean id="headerMapperEasy" class="it.cg.main.integration.easyway.ws.HeaderMapperEasy" />
 	
 	
 	

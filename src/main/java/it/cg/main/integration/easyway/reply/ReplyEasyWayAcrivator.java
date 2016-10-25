@@ -5,15 +5,14 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.support.MessageBuilder;
 
 import com.blog.samples.webservices.DetailService;
 import com.blog.samples.webservices.servicedetail.ServiceCallResponse;
+import com.pass.global.WSPassProHelloWorldOperationResponse;
 
 import it.cg.main.integration.interfaces.ActivatorHandler;
-import net.webservicex.GetWeatherResponse;
 
 public class ReplyEasyWayAcrivator implements ActivatorHandler {
 
@@ -21,17 +20,17 @@ public class ReplyEasyWayAcrivator implements ActivatorHandler {
 	
 	
 	@Gateway(requestChannel="easyChainActivatorResultChannel")
-	public Message<ServiceCallResponse> gotoEasyWay(GetWeatherResponse routingDTO, @Headers Map<String, Object> headerMap)
+	public Message<ServiceCallResponse> gotoEasyWay(WSPassProHelloWorldOperationResponse routingDTO, @Headers Map<String, Object> headerMap)
 	{
 		logger.info("gotoEasyWay input DTO "+routingDTO);
-		GetWeatherResponse responseMeteo = new GetWeatherResponse();
-		responseMeteo.setGetWeatherResult("bah");
+		WSPassProHelloWorldOperationResponse responseMeteo = new WSPassProHelloWorldOperationResponse();
+		responseMeteo.setReturn("hello");
 		
 		ServiceCallResponse callResp = new ServiceCallResponse();
 		DetailService detailServ = new DetailService();
 		
 		
-		detailServ.setServiceType("Easy way");
+		detailServ.setServiceType(routingDTO.getReturn());
 		
 		
 		callResp.setDetailService(detailServ );

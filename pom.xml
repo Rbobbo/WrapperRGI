@@ -24,6 +24,42 @@
 	    <artifactId>javax.servlet-api</artifactId>
 	    <version>3.1.0</version>
 	</dependency>
+	<dependency>
+	    <groupId>javax.xml.bind</groupId>
+	    <artifactId>jaxb-api</artifactId>
+	    <version>2.2.1</version>
+	</dependency>
+	
+	<!-- JAXB plugin -->
+	<dependency>
+	    <groupId>org.jvnet.jaxb2_commons</groupId>
+	    <artifactId>jaxb2-basics-runtime</artifactId>
+	    <version>1.11.1</version>
+	</dependency>
+    <dependency>
+        <groupId>com.sun.codemodel</groupId>
+        <artifactId>codemodel</artifactId>
+        <version>2.6</version>
+    </dependency>
+    
+	<dependency>
+	    <groupId>org.jvnet.jaxb2_commons</groupId>
+	    <artifactId>jaxb2-basics</artifactId>
+	    <version>1.11.1</version>
+	</dependency>
+		
+	<dependency>
+	    <groupId>org.jvnet.jaxb2_commons</groupId>
+	    <artifactId>jaxb2-basics-annotate</artifactId>
+	    <version>1.0.2</version>
+	</dependency>
+       
+	<dependency>
+	    <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.2.1</version>
+	</dependency>
+		
 	<!-- JBoss -->
 	<dependency>
 	    <groupId>wsdl4j</groupId>
@@ -116,22 +152,30 @@
 	    <version>2.2</version>
 	    <executions>
 		    <execution>
+		    	<id>xjc</id>
+		     	<phase>generate-sources</phase>
 		     	<goals>
 		       		<goal>xjc</goal>
 		      	</goals>
-		     	<phase>generate-sources</phase>
+			    <configuration>
+			    	<xsdPathWithinArtifact>/webapp/WEB-INF/xsd</xsdPathWithinArtifact>
+			    	<extension>true</extension>
+			    	<enableIntrospection>true</enableIntrospection>
+			    	<target>2.1</target>
+			    </configuration>
 		    </execution>
 	    </executions>
 		  <configuration>
 	    	<outputDirectory>src/main/generated</outputDirectory>
-	    	<clearOutputDir>false</clearOutputDir>
+	    	<clearOutputDir>true</clearOutputDir>
 		    <sources>
 		    	<source>/webapp/WEB-INF/xsd</source>
 		    </sources>
 		    <xsdPathWithinArtifact>/webapp/WEB-INF/xsd</xsdPathWithinArtifact>
-		    <enableIntrospection>false</enableIntrospection>
+		    <xjbSources>/webapp/WEB-INF/xjb</xjbSources>
 	    </configuration>
 	   </plugin>
+	   <!-- MAVEN WAR -->
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.3</version>

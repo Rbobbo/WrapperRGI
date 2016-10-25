@@ -11,7 +11,7 @@
 	</bean>
 	
  	<bean id="marshallerOutboundJaxb" class="org.springframework.oxm.jaxb.Jaxb2Marshaller" >
-		<property name="contextPaths" value="net.webservicex,com.w3schools.xml"></property>
+		<property name="contextPaths" value="com.pass.global,com.w3schools.xml"></property>
 	</bean>
 		
 		
