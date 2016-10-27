@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import com.pass.global.WSPassProHelloWorldOperation;
 
 import it.cg.main.dto.RoutingDTO;
+import it.cg.main.integration.easyway.parsing.ParsingOut;
 import it.cg.main.integration.interfaces.ActivatorHandler;
-import it.cg.main.parsing.easyway.ParsingOut;
 
 @Component
 public class EasyRouterActivatorBean implements ActivatorHandler

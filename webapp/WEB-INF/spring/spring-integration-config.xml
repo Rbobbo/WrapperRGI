@@ -7,22 +7,21 @@
 	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
 	xmlns:int-http="http://www.springframework.org/schema/integration/http"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/integration/ws
-		http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.3.xsd
-		http://www.springframework.org/schema/integration
-		http://www.springframework.org/schema/integration/spring-integration-4.3.xsd
-		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/oxm
-		http://www.springframework.org/schema/oxm/spring-oxm-4.3.xsd
-		http://www.springframework.org/schema/integration/stream
-		http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.3.xsd
-		http://www.springframework.org/schema/integration/http
-		http://www.springframework.org/schema/integration/http/spring-integration-http-4.3.xsd">
+						http://www.springframework.org/schema/integration/ws
+						http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.3.xsd
+						http://www.springframework.org/schema/integration
+						http://www.springframework.org/schema/integration/spring-integration-4.3.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/oxm
+						http://www.springframework.org/schema/oxm/spring-oxm-4.3.xsd
+						http://www.springframework.org/schema/integration/stream
+						http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.3.xsd
+						http://www.springframework.org/schema/integration/http
+						http://www.springframework.org/schema/integration/http/spring-integration-http-4.3.xsd">
 
 	<!-- Import marshalling handlers -->
 	<import resource="spring-integration-marshalling-config.xml"/>
-
 
 	<!--  Gateway => activator -->
 	<int-ws:inbound-gateway id="wsPortInbound" request-channel="gateForActivatorChannel" 
@@ -51,7 +50,7 @@
 	<int:chain input-channel="easyForChainChannel" output-channel="easyChainActivatorResultChannel"   >
 		<int-ws:outbound-gateway
 				marshaller="marshallerOutboundJaxb"  unmarshaller="marshallerOutboundJaxb" 
-				uri="http://vbwebasu-0.directline.italy:8380/directlinepasspro/services/WSPassPro"
+				uri="${endpointOut}"
 				header-mapper="headerMapperEasy" >
 		</int-ws:outbound-gateway>
 	</int:chain>

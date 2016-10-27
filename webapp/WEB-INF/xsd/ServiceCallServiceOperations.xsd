@@ -19,6 +19,6 @@
                 <xsd:sequence>  
                      <xsd:element name="DetailService" type="detail:DetailService"/>  
                 </xsd:sequence>  
-           </xsd:complexType>  
+           </xsd:complexType>
       </xsd:element>  
 </xsd:schema>

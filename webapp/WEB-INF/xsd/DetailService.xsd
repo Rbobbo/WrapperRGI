@@ -8,6 +8,7 @@
            <xs:sequence>  
                 <xs:element name="ServiceType" type="xs:string"/>  
                 <xs:element name="Other" type="xs:string"/>  
+                <xs:element name="return" type="xs:string"/>  
            </xs:sequence>  
       </xs:complexType>  
       
