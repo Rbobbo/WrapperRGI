@@ -6,6 +6,7 @@ public class RoutingDTO {
 	
 	private String typeOf;
 	private ServiceCallRequest requestService;
+	private InboundRequestHttpJSON requestHttpService;
 	
 	
 	public String getTypeOf() {
@@ -22,6 +23,14 @@ public class RoutingDTO {
 
 	public void setRequestService(ServiceCallRequest requestService) {
 		this.requestService = requestService;
+	}
+
+	public InboundRequestHttpJSON getRequestHttpService() {
+		return requestHttpService;
+	}
+
+	public void setRequestHttpService(InboundRequestHttpJSON requestHttpService) {
+		this.requestHttpService = requestHttpService;
 	}
 
 	

@@ -6,10 +6,10 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
 	
- 	<bean id="inboundMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller" >
+<!--  	<bean id="inboundMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller" >
 		<property name="contextPath" value="com.blog.samples.webservices.servicedetail" ></property>
 	</bean>
-	
+	 -->
  	<bean id="marshallerOutboundJaxb" class="org.springframework.oxm.jaxb.Jaxb2Marshaller" >
 		<property name="contextPaths" value="com.pass.global"></property>
 	</bean>

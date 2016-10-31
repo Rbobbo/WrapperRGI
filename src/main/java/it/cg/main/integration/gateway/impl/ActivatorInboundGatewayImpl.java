@@ -6,9 +6,9 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Service;
 
 import com.blog.samples.webservices.DetailService;
-import com.blog.samples.webservices.servicedetail.ServiceCallRequest;
 import com.blog.samples.webservices.servicedetail.ServiceCallResponse;
 
+import it.cg.main.dto.InboundRequestHttpJSON;
 import it.cg.main.dto.RoutingDTO;
 import it.cg.main.integration.interfaces.ActivatorHandler;
 
@@ -18,6 +18,26 @@ public class ActivatorInboundGatewayImpl implements ActivatorHandler
 {
 	
 	private final Logger logger = Logger.getLogger(getClass());
+	
+	/**
+	 * Setto che tipo di routing è da fare e l'oggetto di request intero per trasportarlo tra
+	 * gli elementi di integration
+	 * @param request
+	 * @return
+	 * @throws MessagingException
+	 */
+	@Gateway
+	public RoutingDTO handlingJsonObjectToRouter(InboundRequestHttpJSON request)
+	{
+		logger.info("for handlingJsonObjectToRouter with : "+request);
+		
+		RoutingDTO routingDto = new RoutingDTO();
+		routingDto.setTypeOf(request.getTesto());
+		routingDto.setRequestHttpService(request);
+		
+		logger.info("for handlingJsonObjectToRouter response : "+routingDto);
+		return routingDto;
+	}
 	
 	/**
 	 * TODO da implementare con la response finale
@@ -41,26 +61,5 @@ public class ActivatorInboundGatewayImpl implements ActivatorHandler
 		return serviceCallResponse;
 	}
 
-	/**
-	 * Setto che tipo di routing è da fare e l'oggetto di request intero per trasportarlo tra
-	 * gli elementi di integration
-	 * @param request
-	 * @return
-	 * @throws MessagingException
-	 */
-	@Gateway
-	public RoutingDTO handleRequestRoutingMessage(ServiceCallRequest request) throws MessagingException
-	{
-		logger.info("for ActivatorInboundGatewayImpl handleRequestRoutingMessage with : "+request);
-		
-		RoutingDTO routingDto = new RoutingDTO();
-		routingDto.setTypeOf(request.getServiceType());
-		routingDto.setRequestService(request);
-		
-		logger.info("for ActivatorInboundGatewayImpl handleRequestRoutingMessage response : "+routingDto);
-		return routingDto;
-	}
-	
-	
 
 }
