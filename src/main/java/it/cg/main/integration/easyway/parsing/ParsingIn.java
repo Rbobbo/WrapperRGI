@@ -2,58 +2,45 @@ package it.cg.main.integration.easyway.parsing;
 
 
 import org.apache.log4j.Logger;
-import org.dozer.Mapper;
-import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.stereotype.Service;
 
 import com.blog.samples.webservices.DetailService;
 import com.pass.global.WSPassProHelloWorldOperationResponse;
+
+import it.cg.main.conf.mapping.EasyMapperMapstruct;
 
 @Service
 public class ParsingIn
 {
 	private Logger logger = Logger.getLogger(getClass());
 	
-	private DozerBeanMapperFactoryBean dozerMapperFactory;
+	private EasyMapperMapstruct easyMapperMapstruct;
 	
 	/**
 	 * Costruttore che necessita del mapper factory :<br>
-	 * <i>@Autowired <br> DozerBeanMapperFactoryBean dozerFactory;</i>
+	 * <i>@Autowired <br> org.mapstruct.@Mapper </i>
 	 * @param mapper
 	 */
-	public ParsingIn(DozerBeanMapperFactoryBean mapperFactory)
+	public ParsingIn(EasyMapperMapstruct easyMapperMapstruct)
 	{
-		this.dozerMapperFactory = mapperFactory;
+		this.easyMapperMapstruct = easyMapperMapstruct;
 	}
 
 	
 	/**
-	 * Ritorna il Mapper di dozer se non è null la variabile
-	 * <b>DozerBeanMapperFactoryBean</b>
+	 * Ritorna il Mapper di mapperstruct
+	 * <b>org.mapstruct.@Mapper</b>
 	 * @return Mapper
-	 * @throws NullPointerException nel caso dozerMapper sia null
+	 * @throws NullPointerException nel caso sia null
 	 */
-	private Mapper getMapper() throws NullPointerException
+	private EasyMapperMapstruct getMapper() throws NullPointerException
 	{
-		Mapper map = null ;
-		if(dozerMapperFactory != null)
+		if(easyMapperMapstruct == null)
 		{
-			try
-			{
-				map = dozerMapperFactory.getObject();
-			}
-			catch(Exception ex)
-			{
-				logger.error("Errore durante il getObject dozer mapper:"+ex.getMessage());
-				ex.printStackTrace();
-			}
-		}
-		else
-		{
-			throw new NullPointerException("dozerMapper null from super implementation");
+			throw new NullPointerException("mapper null from super implementation");
 		}
 		
-		return map;
+		return easyMapperMapstruct;
 	}
 	
 	/**
@@ -65,42 +52,15 @@ public class ParsingIn
 	{
 		logger.info("parse input DTO "+routingDTO);
 		
-		String test = routingDTO.getReturn();
-		routingDTO.setReturn("DOZER---"+test+"---TEST");
-		DetailService response = parsingIn(routingDTO);
+		DetailService response = new DetailService();
+//		Mapstruct test
+		logger.info("START PARSE mapstruct");
+		response = getMapper().helloWorldToDetailService(routingDTO);
+		logger.info("FINISH PARSE mapstruct");
 		
 		logger.info("parse output DTO "+response);
 		return response;
 	}
-	
-	
-	/**
-	 * Classe finale per il dozer mapper
-	 * 
-	 * @param routingDTO
-	 * @return
-	 */
-	private DetailService parsingIn(WSPassProHelloWorldOperationResponse routingDTO)
-	{
-		logger.info("isParsed input DTO "+routingDTO+" begin parser");
-
-		DetailService response = new DetailService();
-		try
-		{
-			getMapper().map(routingDTO, response);
-		}
-		catch(NullPointerException ex)
-		{
-			logger.error("mapper config non presente o errato ? : "+ex.getMessage());
-			return new DetailService();
-		}
-		
-		logger.info("isParsed => "+response);
-		return response;
-	}
-
-
-
 	
 	
 

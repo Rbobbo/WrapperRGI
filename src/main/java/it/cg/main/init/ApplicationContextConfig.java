@@ -12,10 +12,7 @@ import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.dozer.spring.DozerBeanMapperFactoryBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.AbstractResource;
@@ -24,33 +21,11 @@ import org.springframework.core.io.FileSystemResource;
 
 @WebListener
 @Configuration
-@ComponentScan(basePackages={"it.cg.*"})
+//@ComponentScan(basePackages={"it.cg.*"})
 public class ApplicationContextConfig implements ServletContextListener
 { 
-	@Value("${dozer-global-config}")
-	private String pathDozerGlobConfig;
+	private static Logger logger = Logger.getLogger("it.cg.main.init.ApplicationContextConfig");
 	
-	private static Logger logger = Logger.getLogger("ApplicationContextConfig");
-	
-	/**
-	 * Config dozer factory bean than
-	 * @return
-	 */
-	@Bean(name = "dozerBeanMapperFactoryBean")
-    public DozerBeanMapperFactoryBean configDozer()
-	{
-        DozerBeanMapperFactoryBean mapper = new DozerBeanMapperFactoryBean();
-        AbstractResource resources[] = new AbstractResource[] {
-        		new FileSystemResource(pathDozerGlobConfig)
-        };
-        
-        
-		mapper.setMappingFiles(resources);
-        return mapper;
-    }
-	
-	
-
 	/**
 	 * Load configuration external and internal
 	 * @return
@@ -108,6 +83,9 @@ public class ApplicationContextConfig implements ServletContextListener
 
 
 
+	/**
+	 * Inizializzo il log4j
+	 */
 	@Override
 	public void contextInitialized(ServletContextEvent event)
 	{
@@ -117,10 +95,10 @@ public class ApplicationContextConfig implements ServletContextListener
 		{
 			properties.load(context.getResourceAsStream(StaticGeneralConfig.MAIN_PROPERTIES_CLASSPATH.value()+StaticGeneralConfig.MAIN_PROPERTIES_FILE_NAME.value()));
 		}
-		catch (IOException e)
+		catch (IOException ex)
 		{
-			
-			e.printStackTrace();
+			logger.error("GRAVE Impossibile caricare le configurazioni principali del main.properties"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		String log4jConfigFile = properties.getProperty(StaticGeneralConfig.LOG4J_PARAM_MAIN_PROPERTIES.value());
 				
