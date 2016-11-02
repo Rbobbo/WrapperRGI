@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.blog.samples.webservices.DetailService;
 import com.pass.global.WSPassProHelloWorldOperationResponse;
 
+import it.cg.main.conf.mapping.EasyMapperMapstruct;
+
 @Service
 public class ParsingIn
 {
@@ -16,14 +18,17 @@ public class ParsingIn
 	
 	private DozerBeanMapperFactoryBean dozerMapperFactory;
 	
+	private EasyMapperMapstruct easyMapperMapstruct;
+	
 	/**
 	 * Costruttore che necessita del mapper factory :<br>
 	 * <i>@Autowired <br> DozerBeanMapperFactoryBean dozerFactory;</i>
 	 * @param mapper
 	 */
-	public ParsingIn(DozerBeanMapperFactoryBean mapperFactory)
+	public ParsingIn(DozerBeanMapperFactoryBean mapperFactory, EasyMapperMapstruct easyMapperMapstruct)
 	{
 		this.dozerMapperFactory = mapperFactory;
+		this.easyMapperMapstruct = easyMapperMapstruct;
 	}
 
 	
@@ -67,7 +72,15 @@ public class ParsingIn
 		
 		String test = routingDTO.getReturn();
 		routingDTO.setReturn("DOZER---"+test+"---TEST");
+		logger.info("START PARSE dozer");
 		DetailService response = parsingIn(routingDTO);
+		logger.info("FINISH PARSE dozer");
+		
+		routingDTO.setReturn("MAPSTRUCT---"+test+"---TEST");
+//		Mapstruct test
+		logger.info("START PARSE mapstruct");
+		response = easyMapperMapstruct.helloWorldToDetailService(routingDTO);
+		logger.info("FINISH PARSE mapstruct");
 		
 		logger.info("parse output DTO "+response);
 		return response;

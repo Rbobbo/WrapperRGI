@@ -14,6 +14,7 @@ import com.blog.samples.webservices.DetailService;
 import com.blog.samples.webservices.servicedetail.ServiceCallResponse;
 import com.pass.global.WSPassProHelloWorldOperationResponse;
 
+import it.cg.main.conf.mapping.EasyMapperMapstruct;
 import it.cg.main.integration.easyway.parsing.ParsingIn;
 import it.cg.main.integration.interfaces.ActivatorHandler;
 
@@ -22,7 +23,9 @@ public class ReplyEasyWayAcrivator implements ActivatorHandler {
 	private Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	DozerBeanMapperFactoryBean dozerFactory;	
+	DozerBeanMapperFactoryBean dozerFactory;
+	@Autowired
+	private EasyMapperMapstruct easyMapperMapstruct;
 	
 	@Gateway(requestChannel="easyChainActivatorResultChannel")
 	public Message<ServiceCallResponse> gotoEasyWay(WSPassProHelloWorldOperationResponse routingDTO, @Headers Map<String, Object> headerMap)
@@ -32,7 +35,7 @@ public class ReplyEasyWayAcrivator implements ActivatorHandler {
 		ServiceCallResponse callResp = new ServiceCallResponse();
 		DetailService detailServ = new DetailService();
 		
-		ParsingIn pIn = new ParsingIn(dozerFactory);
+		ParsingIn pIn = new ParsingIn(dozerFactory, easyMapperMapstruct);
 		
 		detailServ = pIn.parse(routingDTO);
 		
