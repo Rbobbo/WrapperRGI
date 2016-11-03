@@ -36,7 +36,6 @@ public class ReplyEasyWayAcrivator implements ActivatorHandler {
 		
 		detailServ = pIn.parse(routingDTO);
 		
-		
 		callResp.setDetailService(detailServ );
 		Message<ServiceCallResponse> message = MessageBuilder.withPayload(callResp).build();
 		

@@ -17,6 +17,26 @@ public class ParsingIn
 	private EasyMapperMapstruct easyMapperMapstruct;
 	
 	/**
+	 * 
+	 * @param routingDTO
+	 * @return
+	 */
+	public DetailService parse(WSPassProHelloWorldOperationResponse routingDTO)
+	{
+		logger.info("parse input DTO "+routingDTO);
+		
+		DetailService response = new DetailService();
+//		Mapstruct test
+		
+		response = getMapper().helloWorldToDetailService(routingDTO);
+		
+		
+		logger.info("parse output DTO "+response);
+		return response;
+	}
+	
+	
+	/**
 	 * Costruttore che necessita del mapper factory :<br>
 	 * <i>@Autowired <br> org.mapstruct.@Mapper </i>
 	 * @param mapper
@@ -42,26 +62,6 @@ public class ParsingIn
 		
 		return easyMapperMapstruct;
 	}
-	
-	/**
-	 * 
-	 * @param routingDTO
-	 * @return
-	 */
-	public DetailService parse(WSPassProHelloWorldOperationResponse routingDTO)
-	{
-		logger.info("parse input DTO "+routingDTO);
-		
-		DetailService response = new DetailService();
-//		Mapstruct test
-		logger.info("START PARSE mapstruct");
-		response = getMapper().helloWorldToDetailService(routingDTO);
-		logger.info("FINISH PARSE mapstruct");
-		
-		logger.info("parse output DTO "+response);
-		return response;
-	}
-	
 	
 
 }

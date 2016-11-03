@@ -1,4 +1,4 @@
-package it.cg.main.integration.easyway;
+package it.cg.main.integration.easyway.chain;
 
 import java.util.Map;
 
@@ -11,13 +11,11 @@ import com.pass.global.WSPassProHelloWorldOperation;
 
 import it.cg.main.dto.RoutingDTO;
 import it.cg.main.integration.easyway.parsing.ParsingOut;
-import it.cg.main.integration.interfaces.ActivatorHandler;
 
-//@Component
-public class EasyRouterActivatorBean implements ActivatorHandler
+@Component
+public class EasyActivatorChain
 {
 	private Logger logger = Logger.getLogger(getClass());
-
 	
 	/**
 	 * TODO Parsing
@@ -25,7 +23,7 @@ public class EasyRouterActivatorBean implements ActivatorHandler
 	 * @param headerMap
 	 * @return
 	 */
-//	@Gateway
+	@Gateway
 	public WSPassProHelloWorldOperation gotoEasyCallChain(RoutingDTO request, @Headers Map<String, Object> headerMap)
 	{
 		logger.info("Into gotoEasyCall call , input="+request);
@@ -37,5 +35,6 @@ public class EasyRouterActivatorBean implements ActivatorHandler
 		logger.info("Into method gotoEasyCall , output="+response);
 		return response;
 	}
+
 
 }
